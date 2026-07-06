@@ -1,0 +1,889 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Woodman Inn | Clayton West, Huddersfield</title>
+  <meta name="description" content="The Woodman Inn â€” a traditional Yorkshire pub in Clayton West. Live Sky Sports, Karaoke Nights, private hire and a warm welcome. Call 01484 863298.">
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    :root {
+      --dk-green: #192e22;
+      --mid-green: #254733;
+      --green: #2f5c40;
+      --lt-green: #4a7c59;
+      --gold: #c9a84c;
+      --lt-gold: #e0bf77;
+      --cream: #f5f0e8;
+      --off-white: #faf7f2;
+      --text: #1c1c1c;
+      --text-mid: #4a4a4a;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: Georgia, serif; color: var(--text); background: var(--off-white); }
+
+    /* â”€â”€â”€ NAV â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    nav {
+      position: fixed; top:0; left:0; right:0; z-index:1000;
+      background: rgba(25,46,34,0.97); backdrop-filter: blur(6px);
+      border-bottom: 2px solid var(--gold);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem; height: 68px;
+    }
+    .nav-brand { display:flex; align-items:center; gap:12px; text-decoration:none; }
+    .nav-emblem {
+      width:42px; height:42px; border-radius:50%;
+      background: var(--gold); display:flex; align-items:center;
+      justify-content:center; font-size:20px;
+    }
+    .nav-name { color:var(--cream); font-size:1.1rem; font-weight:bold; line-height:1.1; }
+    .nav-name small { display:block; color:var(--gold); font-size:0.65rem; letter-spacing:2px; text-transform:uppercase; font-family:Arial,sans-serif; }
+    .nav-links { display:flex; gap:1.8rem; list-style:none; }
+    .nav-links a {
+      color:var(--cream); text-decoration:none;
+      font-family:Arial,sans-serif; font-size:0.82rem; letter-spacing:1px; text-transform:uppercase;
+      transition:color .2s;
+    }
+    .nav-links a:hover { color:var(--gold); }
+    .nav-links .cta {
+      background:var(--gold); color:var(--dk-green)!important;
+      padding:8px 18px; border-radius:4px; font-weight:bold;
+    }
+    .nav-links .cta:hover { background:var(--lt-gold)!important; }
+    .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; }
+    .hamburger span { display:block; width:24px; height:2px; background:var(--cream); border-radius:2px; }
+
+    /* â”€â”€â”€ HERO â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    .hero {
+      min-height:100vh; position:relative;
+      display:flex; align-items:center; justify-content:center;
+      text-align:center; overflow:hidden;
+    }
+    /* Layered CSS pub atmosphere */
+    .hero-bg {
+      position:absolute; inset:0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 100%, rgba(201,168,76,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 40% at 20% 80%, rgba(74,124,89,0.2) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 80% 20%, rgba(47,92,64,0.25) 0%, transparent 60%),
+        linear-gradient(160deg, #0d2018 0%, #1a3528 35%, #152b20 65%, #0a1a10 100%);
+    }
+    /* Subtle dot pattern overlay */
+    .hero-bg::after {
+      content:''; position:absolute; inset:0;
+      background-image: radial-gradient(circle, rgba(201,168,76,0.06) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    /* Decorative pub window light effect */
+    .hero-glow {
+      position:absolute; top:-20%; right:10%;
+      width:500px; height:500px; border-radius:50%;
+      background:radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 65%);
+      pointer-events:none;
+    }
+    .hero-content { position:relative; z-index:2; padding:2rem; max-width:780px; }
+    .hero-badge {
+      display:inline-block; border:1px solid rgba(201,168,76,0.6);
+      color:var(--gold); font-size:0.72rem; letter-spacing:3px; text-transform:uppercase;
+      padding:6px 22px; margin-bottom:2rem; font-family:Arial,sans-serif;
+    }
+    .hero h1 {
+      font-size: clamp(3rem,8vw,5.5rem); color:var(--cream); line-height:1.05;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+    .hero h1 em {
+      display:block; font-style:normal; font-size:0.38em; color:var(--gold);
+      letter-spacing:6px; text-transform:uppercase; font-weight:normal; margin-bottom:0.5em;
+      font-family:Arial,sans-serif;
+    }
+    .hero-tagline {
+      font-size:1.1rem; color:rgba(245,240,232,0.78); margin:1.4rem 0 2.4rem;
+      font-style:italic; line-height:1.7;
+    }
+    .hero-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+    .btn-primary {
+      background:var(--gold); color:var(--dk-green); padding:14px 34px;
+      text-decoration:none; font-weight:bold; letter-spacing:1px; text-transform:uppercase;
+      font-size:0.82rem; border-radius:4px; font-family:Arial,sans-serif;
+      transition:all .2s; display:inline-block;
+    }
+    .btn-primary:hover { background:var(--lt-gold); transform:translateY(-2px); }
+    .btn-outline {
+      border:2px solid rgba(245,240,232,0.7); color:var(--cream); padding:13px 34px;
+      text-decoration:none; font-weight:bold; letter-spacing:1px; text-transform:uppercase;
+      font-size:0.82rem; border-radius:4px; font-family:Arial,sans-serif;
+      transition:all .2s; display:inline-block;
+    }
+    .btn-outline:hover { border-color:var(--gold); color:var(--gold); transform:translateY(-2px); }
+    .hero-scroll {
+      position:absolute; bottom:2.5rem; left:50%; transform:translateX(-50%);
+      color:rgba(245,240,232,0.45); font-size:0.7rem; letter-spacing:2px;
+      text-transform:uppercase; font-family:Arial,sans-serif;
+      display:flex; flex-direction:column; align-items:center; gap:8px;
+    }
+    .hero-scroll::after {
+      content:''; width:1px; height:40px; background:rgba(201,168,76,0.5);
+      animation:scrollpulse 2s infinite;
+    }
+    @keyframes scrollpulse { 0%,100%{opacity:.3} 50%{opacity:.9} }
+
+    /* â”€â”€â”€ BANNER STRIP â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    .strip {
+      background:var(--gold);
+      display:flex; flex-wrap:wrap; justify-content:center;
+      gap:0; overflow:hidden;
+    }
+    .strip-item {
+      display:flex; align-items:center; gap:9px;
+      padding:14px 28px; color:var(--dk-green);
+      font-family:Arial,sans-serif; font-size:0.83rem; font-weight:bold;
+      border-right:1px solid rgba(25,46,34,0.15);
+    }
+    .strip-item:last-child { border-right:none; }
+    .strip-icon { font-size:1.2rem; }
+
+    /* â”€â”€â”€ SHARED SECTION STYLES â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    section { padding:90px 2rem; }
+    .lbl {
+      text-align:center; font-size:0.72rem; letter-spacing:4px; text-transform:uppercase;
+      color:var(--lt-green); font-family:Arial,sans-serif; margin-bottom:6px;
+    }
+    .lbl-light { color:var(--gold); }
+    .sec-title {
+      text-align:center; font-size:clamp(2rem,4vw,2.8rem);
+      color:var(--dk-green); line-height:1.2; margin-bottom:10px;
+    }
+    .sec-title-light { color:var(--cream); }
+    .rule {
+      width:54px; height:3px; background:var(--gold);
+      margin:0 auto 1.4rem;
+    }
+    .sec-intro {
+      text-align:center; max-width:600px; margin:0 auto 3.5rem;
+      color:var(--text-mid); font-size:1.02rem; line-height:1.85;
+    }
+    .sec-intro-light { color:rgba(245,240,232,0.7); }
+
+    /* â”€â”€â”€ ABOUT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    #about { background:var(--cream); }
+    .about-wrap {
+      display:grid; grid-template-columns:1fr 1fr; gap:5rem;
+      max-width:1080px; margin:0 auto; align-items:center;
+    }
+    /* Real pub photo card */
+    .pub-card {
+      border-radius:8px; overflow:hidden;
+      box-shadow:0 12px 40px rgba(0,0,0,0.2); position:relative;
+    }
+    .pub-card-photo {
+      width:100%; display:block;
+      object-fit:cover; height:340px;
+    }
+    .pub-card-footer {
+      background:var(--mid-green); padding:18px 24px;
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    .pub-stat { text-align:center; }
+    .pub-stat .num { font-size:1.6rem; font-weight:bold; color:var(--gold); }
+    .pub-stat .desc { font-size:0.7rem; color:rgba(245,240,232,0.7); font-family:Arial,sans-serif; letter-spacing:1px; text-transform:uppercase; }
+    .pub-stat-divider { width:1px; height:40px; background:rgba(245,240,232,0.15); }
+
+    .about-text .lbl { text-align:left; }
+    .about-text h2 { text-align:left; font-size:clamp(1.8rem,3vw,2.4rem); color:var(--dk-green); margin-bottom:8px; }
+    .about-text .rule { margin-left:0; margin-bottom:1.6rem; }
+    .about-text p { color:var(--text-mid); line-height:1.9; margin-bottom:1.1rem; font-size:1.02rem; }
+    .checklist { list-style:none; display:grid; grid-template-columns:1fr 1fr; gap:8px 12px; margin-top:1.8rem; }
+    .checklist li {
+      display:flex; align-items:center; gap:8px;
+      font-family:Arial,sans-serif; font-size:0.88rem; color:var(--text-mid);
+    }
+    .checklist li::before { content:'âœ“'; color:var(--gold); font-weight:bold; }
+
+    /* â”€â”€â”€ EVENTS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    #events { background:var(--dk-green); }
+    .events-grid {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:1.6rem; max-width:1080px; margin:0 auto;
+    }
+    .event-card {
+      border:1px solid rgba(201,168,76,0.25); border-radius:6px;
+      padding:2.2rem 1.8rem; text-align:center;
+      background:rgba(255,255,255,0.04);
+      transition:all .3s; cursor:default;
+    }
+    .event-card:hover {
+      background:rgba(255,255,255,0.09); border-color:var(--gold);
+      transform:translateY(-4px); box-shadow:0 8px 24px rgba(0,0,0,0.3);
+    }
+    .ev-icon { font-size:2.8rem; display:block; margin-bottom:1rem; }
+    .event-card h3 { color:var(--gold); font-size:1.3rem; margin-bottom:6px; }
+    .ev-when {
+      font-family:Arial,sans-serif; font-size:0.78rem; letter-spacing:2px;
+      text-transform:uppercase; color:var(--lt-gold); margin-bottom:1rem;
+    }
+    .event-card p { color:rgba(245,240,232,0.68); font-size:0.92rem; line-height:1.75; }
+    .ev-tag {
+      display:inline-block; margin-top:1.2rem;
+      background:var(--gold); color:var(--dk-green);
+      padding:4px 16px; border-radius:20px;
+      font-size:0.72rem; font-family:Arial,sans-serif;
+      font-weight:bold; letter-spacing:1px; text-transform:uppercase;
+    }
+
+    /* â”€â”€â”€ FEATURES â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    #features { background:var(--off-white); }
+    .features-grid {
+      display:grid; grid-template-columns:repeat(3,1fr);
+      gap:1.6rem; max-width:1080px; margin:0 auto;
+    }
+    .feat-box {
+      text-align:center; padding:2rem 1.5rem;
+      background:white; border:1px solid #e5ddd0; border-radius:6px;
+      transition:all .3s;
+    }
+    .feat-box:hover {
+      border-color:var(--gold); transform:translateY(-3px);
+      box-shadow:0 6px 20px rgba(201,168,76,0.15);
+    }
+    .feat-icon { font-size:2.4rem; display:block; margin-bottom:1rem; }
+    .feat-box h3 { color:var(--dk-green); font-size:1.1rem; margin-bottom:8px; }
+    .feat-box p { color:var(--text-mid); font-size:0.88rem; line-height:1.65; font-family:Arial,sans-serif; }
+
+    /* â”€â”€â”€ GALLERY â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    #gallery { background:#ede7d9; }
+    .gallery-grid {
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      grid-template-rows:repeat(2,340px);
+      gap:10px; max-width:1080px; margin:0 auto;
+    }
+    .gal-item {
+      border-radius:5px; overflow:hidden; position:relative;
+      background:#1a3528;
+      transition:transform .3s;
+    }
+    .gal-item:hover { transform:scale(1.02); z-index:2; }
+    .gal-item.tall { grid-row:span 1; }
+    .gal-item img {
+      width:100%; height:100%; object-fit:cover;
+      display:block; position:absolute; inset:0;
+    }
+    .gal-overlay {
+      position:absolute; inset:0;
+      background:rgba(0,0,0,0.35);
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      gap:8px; padding:1rem;
+    }
+    .gal-overlay-icon { font-size:2.8rem; opacity:0.9; }
+    .gal-overlay-label {
+      color:var(--cream); font-family:Arial,sans-serif;
+      font-size:0.8rem; letter-spacing:2px; text-transform:uppercase;
+      opacity:0.85;
+    }
+    .gal-overlay-sub {
+      color:var(--gold); font-size:0.85rem; font-style:italic; opacity:0.9;
+    }
+    .gal-note {
+      text-align:center; margin-top:1.5rem; color:var(--text-mid);
+      font-family:Arial,sans-serif; font-size:0.85rem;
+    }
+    .gal-note a { color:var(--lt-green); text-decoration:none; font-weight:bold; }
+    .gal-note a:hover { color:var(--gold); }
+
+    /* â”€â”€â”€ REVIEWS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    #reviews { background:var(--cream); }
+    .review-hero-row {
+      display:flex; align-items:center; justify-content:center; gap:2rem;
+      margin-bottom:3rem; flex-wrap:wrap;
+    }
+    .review-score-box {
+      background:var(--dk-green); color:var(--cream);
+      border-radius:8px; padding:2rem 2.5rem; text-align:center;
+      box-shadow:0 6px 24px rgba(0,0,0,0.15);
+    }
+    .review-score-box .big-num { font-size:3.5rem; font-weight:bold; color:var(--gold); line-height:1; }
+    .review-score-box .stars-row { color:var(--gold); font-size:1.4rem; letter-spacing:3px; margin:6px 0; }
+    .review-score-box .source { font-family:Arial,sans-serif; font-size:0.78rem; color:rgba(245,240,232,0.6); letter-spacing:1px; text-transform:uppercase; }
+    .reviews-grid {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:1.8rem; max-width:1000px; margin:0 auto;
+    }
+    .review-card {
+      background:white; border-radius:6px; padding:1.8rem;
+      border-left:4px solid var(--gold);
+      box-shadow:0 2px 12px rgba(0,0,0,0.06);
+    }
+    .review-stars { color:var(--gold); font-size:1rem; margin-bottom:10px; }
+    .review-card blockquote { color:var(--text-mid); font-style:italic; line-height:1.75; font-size:0.95rem; margin-bottom:1rem; }
+    .reviewer { font-family:Arial,sans-serif; font-size:0.82rem; font-weight:bold; color:var(--dk-green); }
+    .reviewer span { color:#999; font-weight:normal; margin-left:6px; }
+
+    /* â”€â”€â”€ CONTACT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    #contact { background:var(--mid-green); }
+    .contact-grid {
+      display:grid; grid-template-columns:1fr 1fr; gap:4rem;
+      max-width:1080px; margin:0 auto; align-items:start;
+    }
+    .contact-info h3 { color:var(--gold); font-size:1.4rem; margin-bottom:2rem; }
+    .c-item { display:flex; gap:1.2rem; margin-bottom:2rem; align-items:flex-start; }
+    .c-icon {
+      width:44px; height:44px; border-radius:50%; flex-shrink:0;
+      background:rgba(201,168,76,0.15); border:1px solid rgba(201,168,76,0.4);
+      display:flex; align-items:center; justify-content:center; font-size:1.15rem;
+    }
+    .c-text strong {
+      display:block; color:var(--gold);
+      font-size:0.72rem; letter-spacing:2px; text-transform:uppercase;
+      font-family:Arial,sans-serif; margin-bottom:4px;
+    }
+    .c-text a, .c-text p {
+      color:var(--cream); text-decoration:none; font-size:1rem; line-height:1.55;
+    }
+    .c-text a:hover { color:var(--gold); }
+    .social-row { margin-top:2.5rem; }
+    .social-row strong {
+      display:block; color:var(--gold); font-size:0.72rem;
+      letter-spacing:2px; text-transform:uppercase; font-family:Arial,sans-serif; margin-bottom:1rem;
+    }
+    .social-btn {
+      display:inline-flex; align-items:center; gap:8px;
+      border:1px solid rgba(201,168,76,0.4); padding:10px 20px; border-radius:4px;
+      color:var(--cream); text-decoration:none; font-family:Arial,sans-serif; font-size:0.85rem;
+      transition:all .2s;
+    }
+    .social-btn:hover { border-color:var(--gold); background:rgba(201,168,76,0.1); }
+    /* CSS map placeholder */
+    .map-block { border-radius:8px; overflow:hidden; box-shadow:0 10px 32px rgba(0,0,0,0.3); }
+    .map-visual {
+      height:380px;
+      background:
+        /* roads */
+        repeating-linear-gradient(0deg, transparent 0, transparent 49px, rgba(255,255,255,0.08) 49px, rgba(255,255,255,0.08) 52px),
+        repeating-linear-gradient(90deg, transparent 0, transparent 69px, rgba(255,255,255,0.06) 69px, rgba(255,255,255,0.06) 72px),
+        /* base map */
+        linear-gradient(160deg, #2d4a35 0%, #3d6045 30%, #264030 60%, #1e3828 100%);
+      display:flex; align-items:center; justify-content:center; position:relative;
+    }
+    .map-pin {
+      display:flex; flex-direction:column; align-items:center; gap:8px;
+    }
+    .map-pin-icon {
+      width:60px; height:60px; border-radius:50% 50% 50% 0;
+      transform:rotate(-45deg); background:var(--gold);
+      display:flex; align-items:center; justify-content:center;
+      box-shadow:0 4px 20px rgba(0,0,0,0.4); position:relative;
+    }
+    .map-pin-icon::after {
+      content:'ðŸº'; transform:rotate(45deg); font-size:1.4rem;
+      position:absolute;
+    }
+    .map-pin-label {
+      background:rgba(25,46,34,0.95); color:var(--cream);
+      padding:10px 20px; border-radius:6px; text-align:center;
+      box-shadow:0 4px 16px rgba(0,0,0,0.4);
+      border:1px solid rgba(201,168,76,0.4);
+    }
+    .map-pin-label strong { display:block; color:var(--gold); font-size:1.05rem; }
+    .map-pin-label span { font-family:Arial,sans-serif; font-size:0.8rem; color:rgba(245,240,232,0.7); }
+    .map-footer {
+      background:rgba(0,0,0,0.35); padding:1rem 1.5rem;
+      color:var(--cream); font-family:Arial,sans-serif; font-size:0.85rem;
+      display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;
+    }
+    .map-footer a { color:var(--gold); text-decoration:none; font-size:0.82rem; }
+    .map-footer a:hover { text-decoration:underline; }
+
+    /* â”€â”€â”€ FOOTER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    footer {
+      background:#0e1e16; border-top:2px solid rgba(201,168,76,0.25);
+      padding:3.5rem 2rem 2rem;
+    }
+    .footer-grid {
+      display:grid; grid-template-columns:1.6fr 1fr 1fr; gap:3rem;
+      max-width:1080px; margin:0 auto;
+      padding-bottom:2.5rem; border-bottom:1px solid rgba(255,255,255,0.07);
+    }
+    .footer-brand-name { font-size:1.9rem; color:var(--cream); }
+    .footer-brand-name span { color:var(--gold); }
+    .footer-brand p { color:rgba(245,240,232,0.5); font-size:0.88rem; line-height:1.7; margin-top:10px; font-family:Arial,sans-serif; }
+    .footer-col h4 {
+      color:var(--gold); font-size:0.7rem; letter-spacing:3px; text-transform:uppercase;
+      font-family:Arial,sans-serif; margin-bottom:1.2rem;
+    }
+    .footer-col ul { list-style:none; }
+    .footer-col ul li { margin-bottom:8px; }
+    .footer-col ul li a, .footer-col ul li p {
+      color:rgba(245,240,232,0.55); font-family:Arial,sans-serif;
+      font-size:0.86rem; text-decoration:none; transition:color .2s;
+    }
+    .footer-col ul li a:hover { color:var(--gold); }
+    .footer-bottom {
+      max-width:1080px; margin:1.8rem auto 0;
+      display:flex; justify-content:space-between; align-items:center;
+      flex-wrap:wrap; gap:1rem;
+    }
+    .footer-bottom p { color:rgba(245,240,232,0.3); font-family:Arial,sans-serif; font-size:0.78rem; }
+    .footer-badge {
+      display:inline-flex; align-items:center; gap:6px;
+      background:rgba(201,168,76,0.1); border:1px solid rgba(201,168,76,0.25);
+      padding:6px 14px; border-radius:20px; color:var(--gold);
+      font-size:0.76rem; font-family:Arial,sans-serif;
+    }
+
+    /* â”€â”€â”€ SCROLL ANIMATIONS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    .reveal {
+      opacity:0; transform:translateY(36px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible {
+      opacity:1; transform:translateY(0);
+    }
+    .reveal-left {
+      opacity:0; transform:translateX(-36px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal-left.visible {
+      opacity:1; transform:translateX(0);
+    }
+    .reveal-right {
+      opacity:0; transform:translateX(36px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal-right.visible {
+      opacity:1; transform:translateX(0);
+    }
+    .delay-1 { transition-delay:0.1s; }
+    .delay-2 { transition-delay:0.2s; }
+    .delay-3 { transition-delay:0.3s; }
+    .delay-4 { transition-delay:0.4s; }
+    .delay-5 { transition-delay:0.5s; }
+    .delay-6 { transition-delay:0.6s; }
+
+    /* â”€â”€â”€ RESPONSIVE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    @media(max-width:768px){
+      nav { padding:0 1.2rem; }
+      .nav-links {
+        display:none; position:absolute; top:68px; left:0; right:0;
+        background:var(--dk-green); flex-direction:column;
+        padding:1.5rem 2rem; gap:1.4rem;
+        border-bottom:2px solid var(--gold);
+        box-shadow:0 8px 24px rgba(0,0,0,0.3);
+      }
+      .nav-links.open { display:flex; }
+      .nav-links a { font-size:1rem; padding:4px 0; }
+      .hamburger { display:flex; }
+      .about-wrap,.contact-grid,.footer-grid { grid-template-columns:1fr; gap:2rem; }
+      .features-grid { grid-template-columns:1fr 1fr; }
+      .events-grid { grid-template-columns:1fr 1fr; }
+      .gallery-grid { grid-template-columns:1fr 1fr; grid-template-rows:repeat(2,220px); }
+      .reviews-grid { grid-template-columns:1fr; }
+      section { padding:60px 1.2rem; }
+      .pub-card-photo { height:260px; }
+      .strip { gap:0; }
+      .strip-item { padding:10px 14px; font-size:0.78rem; border-bottom:1px solid rgba(25,46,34,0.15); }
+      .hero-badge { font-size:0.62rem; letter-spacing:2px; }
+      .map-visual { height:280px; }
+    }
+    @media(max-width:480px){
+      .features-grid { grid-template-columns:1fr; }
+      .events-grid { grid-template-columns:1fr; }
+      .gallery-grid { grid-template-columns:1fr 1fr; grid-template-rows:repeat(2,160px); }
+      .hero-btns { flex-direction:column; align-items:center; }
+      .checklist { grid-template-columns:1fr; }
+      .footer-grid { grid-template-columns:1fr; }
+      .review-hero-row { flex-direction:column; }
+      .hero-content { padding:1rem; }
+      .sec-title { font-size:1.7rem; }
+      .contact-grid { gap:2rem; }
+      nav { height:60px; }
+      .nav-links { top:60px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-brand">
+    <div class="nav-emblem">ðŸº</div>
+    <div class="nav-name">The Woodman Inn <small>Clayton West Â· HD8 9QB</small></div>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#events">What's On</a></li>
+    <li><a href="#features">Facilities</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact" class="cta">Find Us</a></li>
+  </ul>
+  <div class="hamburger" id="hbg" onclick="document.getElementById('navLinks').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Est. in the heart of Clayton West, West Yorkshire</div>
+    <h1><em>Welcome to</em>The Woodman Inn</h1>
+    <p class="hero-tagline">Your traditional Yorkshire local â€” warm ales, live sport, great nights out<br>and a welcome that never wears out.</p>
+    <div class="hero-btns">
+      <a href="#events" class="btn-primary">What's On</a>
+      <a href="#contact" class="btn-outline">Find Us</a>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-item"><span class="strip-icon">ðŸ“º</span>Sky Sports Live</div>
+  <div class="strip-item"><span class="strip-icon">ðŸŽ¤</span>Karaoke Nights</div>
+  <div class="strip-item"><span class="strip-icon">ðŸº</span>Draft Ales &amp; Lagers</div>
+  <div class="strip-item"><span class="strip-icon">ðŸŽ‰</span>Private Hire Available</div>
+  <div class="strip-item"><span class="strip-icon">â­</span>100% Recommended</div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-wrap">
+    <!-- Pub photo -->
+    <div class="pub-card reveal reveal-left">
+      <img src="WOODMAN.jpg" alt="The Woodman Inn, Clayton West" class="pub-card-photo">
+      <div class="pub-card-footer">
+        <div class="pub-stat"><div class="num">374</div><div class="desc">Facebook Followers</div></div>
+        <div class="pub-stat-divider"></div>
+        <div class="pub-stat"><div class="num">100%</div><div class="desc">Recommended</div></div>
+        <div class="pub-stat-divider"></div>
+        <div class="pub-stat"><div class="num">Â£Â£</div><div class="desc">Price Range</div></div>
+      </div>
+    </div>
+
+    <div class="about-text reveal reveal-right">
+      <div class="lbl reveal">About Us</div>
+      <h2 class="sec-title" style="text-align:left">A True Yorkshire Local</h2>
+      <div class="rule" style="margin-left:0"></div>
+      <p>
+        Nestled in the heart of <strong>Clayton West</strong>, The Woodman Inn is everything a proper village pub should be â€” welcoming, warm and full of character. Our traditional stone-built pub has been serving the local community for years with great drinks, lively entertainment and a friendly atmosphere.
+      </p>
+      <p>
+        Whether you're popping in after work for a quiet pint, watching the big match live on Sky Sports, or joining us for one of our legendary Karaoke Nights â€” you'll always find a smile and a seat at The Woodman.
+      </p>
+      <p>
+        We're also happy to host your <strong>private events and celebrations</strong> â€” birthdays, anniversaries and get-togethers. Get in touch to discuss your requirements.
+      </p>
+      <ul class="checklist">
+        <li>Traditional Yorkshire pub</li>
+        <li>Sky Sports live</li>
+        <li>Outdoor decking area</li>
+        <li>Regular entertainment</li>
+        <li>Private hire available</li>
+        <li>Warm, friendly atmosphere</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section id="events">
+  <div class="lbl lbl-light reveal">Entertainment</div>
+  <h2 class="sec-title sec-title-light reveal delay-1">What's On</h2>
+  <div class="rule"></div>
+  <p class="sec-intro sec-intro-light">From karaoke nights to live sport and seasonal celebrations â€” there's always something happening at The Woodman.</p>
+  <div class="events-grid">
+    <div class="event-card reveal delay-1">
+      <span class="ev-icon">ðŸŽ¤</span>
+      <h3>Karaoke Night</h3>
+      <div class="ev-when">Every Friday Â· from 9pm</div>
+      <p>Sing your heart out every Friday night! Whether you're a seasoned performer or a first-timer, our Karaoke Nights are a brilliant night out with a great crowd.</p>
+      <span class="ev-tag">Weekly</span>
+    </div>
+    <div class="event-card reveal delay-2">
+      <span class="ev-icon">ðŸŽ²</span>
+      <h3>Crazy Karaoke</h3>
+      <div class="ev-when">Special Events</div>
+      <p>Our Crazy Karaoke evenings turn things up a notch â€” expect themed nights, special prizes and a packed pub full of people having an absolute blast.</p>
+      <span class="ev-tag">Special Events</span>
+    </div>
+    <div class="event-card reveal delay-3">
+      <span class="ev-icon">ðŸ“º</span>
+      <h3>Live Sky Sports</h3>
+      <div class="ev-when">All Major Fixtures</div>
+      <p>Never miss a moment of the action. We show all the big games, races and events live on Sky Sports â€” the best place in Clayton West to watch with mates.</p>
+      <span class="ev-tag">Year Round</span>
+    </div>
+    <div class="event-card reveal delay-4">
+      <span class="ev-icon">ðŸŽ„</span>
+      <h3>Festive Events</h3>
+      <div class="ev-when">Christmas &amp; New Year's Eve</div>
+      <p>Join us for our Christmas Eve and New Year's Eve celebrations â€” special entertainment, festive drinks and a brilliant party atmosphere.</p>
+      <span class="ev-tag">Seasonal</span>
+    </div>
+    <div class="event-card reveal delay-5">
+      <span class="ev-icon">ðŸŽ‚</span>
+      <h3>Private Hire</h3>
+      <div class="ev-when">Available for Bookings</div>
+      <p>Celebrating a birthday or special occasion? Hire The Woodman for your private party. All welcome â€” get in touch to find out more.</p>
+      <span class="ev-tag">Book Now</span>
+    </div>
+    <div class="event-card reveal delay-6">
+      <span class="ev-icon">ðŸº</span>
+      <h3>Open Every Day</h3>
+      <div class="ev-when">7 Days a Week</div>
+      <p>No event needed â€” The Woodman is open every day. Pop in for a quiet drink, meet old friends or make new ones. You're always welcome here.</p>
+      <span class="ev-tag">Open Daily</span>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="lbl reveal">Why Choose Us</div>
+  <h2 class="sec-title reveal delay-1">Everything You'd Expect From a Great Local</h2>
+  <div class="rule"></div>
+  <p class="sec-intro">The Woodman has everything that makes a pub worth coming back to, time and time again.</p>
+  <div class="features-grid">
+    <div class="feat-box reveal delay-1">
+      <span class="feat-icon">ðŸ¡</span>
+      <h3>Traditional Atmosphere</h3>
+      <p>A proper, unpretentious Yorkshire pub with real character. Warm, welcoming and exactly what a local should feel like.</p>
+    </div>
+    <div class="feat-box reveal delay-2">
+      <span class="feat-icon">ðŸŒ¿</span>
+      <h3>Outdoor Decking</h3>
+      <p>Enjoy outdoor seating on our raised decking area, complete with flower baskets â€” perfect for a summer pint in the fresh Yorkshire air.</p>
+    </div>
+    <div class="feat-box reveal delay-3">
+      <span class="feat-icon">ðŸ”¥</span>
+      <h3>Cosy Interior</h3>
+      <p>Inside you'll find a warm, comfortable space with wooden furniture, a real fireplace and a proper pub feel.</p>
+    </div>
+    <div class="feat-box reveal delay-4">
+      <span class="feat-icon">ðŸ“º</span>
+      <h3>Sky Sports Live</h3>
+      <p>Catch all the major football, rugby, boxing and more live on our screens. The best place in Clayton West to watch the match.</p>
+    </div>
+    <div class="feat-box reveal delay-5">
+      <span class="feat-icon">ðŸ»</span>
+      <h3>Great Drinks Selection</h3>
+      <p>A fine range of draft ales, lagers and spirits. Fairly priced (Â£Â£) so your round doesn't break the bank.</p>
+    </div>
+    <div class="feat-box reveal delay-6">
+      <span class="feat-icon">ðŸ“</span>
+      <h3>Easy to Find</h3>
+      <p>Right in the centre of Clayton West village at 1 Wakefield Road â€” easy to find, easy to park, easy to love.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="lbl reveal">Take a Look</div>
+  <h2 class="sec-title reveal delay-1">Life at The Woodman</h2>
+  <div class="rule"></div>
+  <p class="sec-intro">A traditional stone-built Yorkshire pub with a warm heart and great nights out.</p>
+  <div class="gallery-grid">
+    <div class="gal-item tall reveal delay-1">
+      <img src="WOODMAN.jpg" alt="The Woodman Inn exterior">
+      <div class="gal-overlay">
+        <div class="gal-overlay-label">The Woodman</div>
+        <div class="gal-overlay-sub">Clayton West</div>
+      </div>
+    </div>
+    <div class="gal-item reveal delay-1">
+      <img src="KAREOKE.jpg" alt="Karaoke Night at The Woodman">
+      <div class="gal-overlay">
+        <div class="gal-overlay-label">Karaoke Night</div>
+        <div class="gal-overlay-sub">Every Friday 9pm</div>
+      </div>
+    </div>
+    <div class="gal-item reveal delay-2">
+      <img src="SKY.jpg" alt="Sky Sports Live at The Woodman">
+      <div class="gal-overlay">
+        <div class="gal-overlay-label">Sky Sports</div>
+        <div class="gal-overlay-sub">Live Here</div>
+      </div>
+    </div>
+    <div class="gal-item reveal delay-3">
+      <img src="BAR.jpg" alt="The bar at The Woodman Inn">
+      <div class="gal-overlay">
+        <div class="gal-overlay-label">The Bar</div>
+        <div class="gal-overlay-sub">Draft &amp; Cask Ales</div>
+      </div>
+    </div>
+  </div>
+  <p class="gal-note">
+    ðŸ“¸ See more photos on our <a href="https://www.facebook.com/people/Woodman-Inn/100063481214917/" target="_blank">Facebook page</a>
+  </p>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="lbl reveal">What Locals Say</div>
+  <h2 class="sec-title reveal delay-1">100% Recommended</h2>
+  <div class="rule"></div>
+  <div class="review-hero-row">
+    <div class="review-score-box">
+      <div class="big-num">100%</div>
+      <div class="stars-row">â˜…â˜…â˜…â˜…â˜…</div>
+      <div class="source">11 Reviews Â· Facebook</div>
+    </div>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card reveal delay-1">
+      <div class="review-stars">â˜…â˜…â˜…â˜…â˜…</div>
+      <blockquote>"A proper pub with a proper welcome. Always a great atmosphere and the karaoke nights are brilliant fun. Our favourite local!"</blockquote>
+      <div class="reviewer">Facebook Reviewer <span>via Facebook</span></div>
+    </div>
+    <div class="review-card reveal delay-2">
+      <div class="review-stars">â˜…â˜…â˜…â˜…â˜…</div>
+      <blockquote>"Lovely traditional pub, great staff and very well priced. Always feel at home here. The Sky Sports is a great bonus too!"</blockquote>
+      <div class="reviewer">Facebook Reviewer <span>via Facebook</span></div>
+    </div>
+    <div class="review-card reveal delay-3">
+      <div class="review-stars">â˜…â˜…â˜…â˜…â˜…</div>
+      <blockquote>"Best pub in Clayton West â€” no competition. The Friday karaoke nights are something else. Great community spirit all round."</blockquote>
+      <div class="reviewer">Facebook Reviewer <span>via Facebook</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="lbl lbl-light reveal">Get in Touch</div>
+  <h2 class="sec-title sec-title-light reveal delay-1">Find Us</h2>
+  <div class="rule"></div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h3>The Woodman Inn</h3>
+      <div class="c-item">
+        <div class="c-icon">ðŸ“</div>
+        <div class="c-text">
+          <strong>Address</strong>
+          <p>1 Wakefield Road<br>Clayton West<br>Huddersfield, HD8 9QB</p>
+        </div>
+      </div>
+      <div class="c-item">
+        <div class="c-icon">ðŸ“ž</div>
+        <div class="c-text">
+          <strong>Phone</strong>
+          <a href="tel:01484863298">01484 863298</a>
+        </div>
+      </div>
+      <div class="c-item">
+        <div class="c-icon">âœ‰ï¸</div>
+        <div class="c-text">
+          <strong>Email</strong>
+          <a href="mailto:helbow63@hotmail.com">helbow63@hotmail.com</a>
+        </div>
+      </div>
+      <div class="c-item">
+        <div class="c-icon">ðŸ’°</div>
+        <div class="c-text">
+          <strong>Price Range</strong>
+          <p>Â£Â£ â€” Great value for money</p>
+        </div>
+      </div>
+      <div class="social-row">
+        <strong>Follow Us</strong>
+        <a href="https://www.facebook.com/people/Woodman-Inn/100063481214917/" target="_blank" class="social-btn">
+          ðŸ‘ &nbsp;Facebook Page
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <div class="map-block">
+        <div class="map-visual">
+          <div class="map-pin">
+            <div class="map-pin-icon"></div>
+            <div class="map-pin-label">
+              <strong>The Woodman Inn</strong>
+              <span>1 Wakefield Road, Clayton West, HD8 9QB</span>
+            </div>
+          </div>
+        </div>
+        <div class="map-footer">
+          <span>ðŸ“ 1 Wakefield Road, Clayton West, HD8 9QB</span>
+          <a href="https://maps.google.com/?q=1+Wakefield+Road+Clayton+West+HD8+9QB" target="_blank">Open in Google Maps â†’</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-brand-name">The <span>Woodman</span> Inn</div>
+      <p>A traditional Yorkshire local in the heart of Clayton West. Good drinks, great entertainment and a warm welcome â€” always.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#events">What's On</a></li>
+        <li><a href="#features">Facilities</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Find Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:01484863298">01484 863298</a></li>
+        <li><a href="mailto:helbow63@hotmail.com">helbow63@hotmail.com</a></li>
+        <li><p>1 Wakefield Road</p></li>
+        <li><p>Clayton West, HD8 9QB</p></li>
+        <li><a href="https://www.facebook.com/people/Woodman-Inn/100063481214917/" target="_blank">Facebook Page â†—</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 The Woodman Inn, Clayton West. All rights reserved.</p>
+    <div class="footer-badge">â­ 100% Recommended on Facebook</div>
+  </div>
+</footer>
+
+<script>
+  // â”€â”€ Scroll reveal â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right')
+    .forEach(el => observer.observe(el));
+
+  // â”€â”€ Close mobile nav when a link is tapped â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.getElementById('navLinks').classList.remove('open');
+    });
+  });
+
+  // â”€â”€ Hamburger icon morphs to Ã— when open â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  document.getElementById('hbg').addEventListener('click', function() {
+    const open = document.getElementById('navLinks').classList.contains('open');
+    const spans = this.querySelectorAll('span');
+    if (open) {
+      spans[0].style.transform = 'rotate(45deg) translate(5px,5px)';
+      spans[1].style.opacity  = '0';
+      spans[2].style.transform = 'rotate(-45deg) translate(5px,-5px)';
+    } else {
+      spans[0].style.transform = '';
+      spans[1].style.opacity  = '';
+      spans[2].style.transform = '';
+    }
+  });
+</script>
+</body>
+</html>
+
